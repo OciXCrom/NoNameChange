@@ -1,0 +1,8 @@
+[en]
+NNC_MESSAGE = &x04[NNC] &x01You are not allowed to change your name.
+
+[mk]
+NNC_MESSAGE = &x04[NNC] &x01Nemash pravo da si promenish imeto.
+
+[bg]
+NNC_MESSAGE = &x04[NNC] &x01Nqmash pravo da si promenish imeto.
