@@ -1,8 +1,17 @@
 [en]
-NNC_MESSAGE = &x04[NNC] &x01You are not allowed to change your name.
+NNC_MESSAGE = You are not allowed to change your name.
+NNC_CHANGE_ONE = You can change your name &x04%i &x01more time.
+NNC_CHANGE_MORE = You can change your name &x04%i &x01more times.
+NNC_CHANGE_ZERO = You can't change your name during this session anymore.
 
 [mk]
-NNC_MESSAGE = &x04[NNC] &x01Nemash pravo da si promenish imeto.
+NNC_MESSAGE = Nemash pravo da si go promenish imeto.
+NNC_CHANGE_ONE = Mozhesh da si go smenish imeto ushte &x04%i &x01pat.
+NNC_CHANGE_MORE = Mozhesh da si go smenish imeto ushte &x04%i &x01pati.
+NNC_CHANGE_ZERO = Vekje ne mozhesh da si go menuvash imeto za ovaa sesija.
 
 [bg]
-NNC_MESSAGE = &x04[NNC] &x01Nqmash pravo da si promenish imeto.
+NNC_MESSAGE = Nqmash pravo da si promenish imeto.
+NNC_CHANGE_ONE = Mojesh da si promenish imeto oshte &x04%i &x01put.
+NNC_CHANGE_MORE = Mojesh da si promenish imeto oshte &x04%i &x01puti.
+NNC_CHANGE_ZERO = Veche ne mojesh da si promenqsh imeto za tazi sesiq.
