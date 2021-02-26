@@ -24,3 +24,4 @@ NNC_MESSAGE = Du darfst deinen Namen nicht ändern.
 NNC_CHANGE_ONE = Du darfst deinen Namen noch &x04%i &x01Mal ändern.
 NNC_CHANGE_MORE = Du darfst deinen Namen noch &x04%i &x01Mal ändern.
 NNC_CHANGE_ZERO = Du kannst deinen Namen nicht mehr ändern.
+NNC_ADMIN_CHANGE = &x03%s &x01änderte den Namen von &x04%s&x01 in &x03%s
