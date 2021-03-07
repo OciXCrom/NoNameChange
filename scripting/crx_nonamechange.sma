@@ -4,6 +4,13 @@
 #include <fakemeta>
 #include <nnc_const>
 
+native cm_update_player_data(id)
+
+new const g_szNatives[][] =
+{
+	"cm_update_player_data"
+}
+
 #if !defined MAX_PLAYERS
 const MAX_PLAYERS = 32
 #endif
@@ -12,7 +19,7 @@ const MAX_PLAYERS = 32
 const MAX_NAME_LENGTH = 32
 #endif
 
-new const PLUGIN_VERSION[] = "2.0"
+new const PLUGIN_VERSION[] = "2.1"
 new const INFO_NAME[] = "name"
 
 new const NAME_CHANGE_CMDS[][] = { "amx_nick", "nnc_nick", "amx_name", "nnc_name" }
@@ -33,6 +40,8 @@ new _nnc_show_message
 new _nnc_dead_immediate
 new _nnc_user_name_changed
 
+new _chatmanager
+
 public plugin_init()
 {
 	register_plugin("No Name Change", PLUGIN_VERSION, "OciXCrom")
@@ -47,6 +56,11 @@ public plugin_init()
 	_nnc_dead_immediate = register_cvar("nnc_dead_immediate", "0")
 
 	_nnc_user_name_changed = CreateMultiForward("nnc_user_name_changed", ET_STOP, FP_CELL, FP_STRING, FP_STRING)
+
+	if(LibraryExists("chatmanager", LibType_Library))
+	{
+		_chatmanager = true
+	}
 
 	CC_SetPrefix("&x04[NNC]")
 }
@@ -90,6 +104,11 @@ public Cmd_ChangeName(id, iLevel, iCid)
 
 	g_iAllowChange[iPlayer] = AllowChange_NoMsg
 	change_name(iPlayer, szNewName)
+
+	if(_chatmanager)
+	{
+		cm_update_player_data(iPlayer)
+	}
 
 	CC_LogMessage(0, _, "%L", LANG_PLAYER, "NNC_ADMIN_CHANGE", szAdminName, szOldName, szNewName)
 	return PLUGIN_HANDLED
@@ -209,11 +228,31 @@ write_change_msg(id, const szOldName[], const szNewName[])
 public plugin_natives()
 {
 	register_library("nnc")
+	set_native_filter("native_filter")
+
 	register_native("nnc_change_user_name",      "_nnc_change_user_name")
 	register_native("nnc_get_max_changes",       "_nnc_get_max_changes")
 	register_native("nnc_get_user_changes_left", "_nnc_get_user_changes_left")
 	register_native("nnc_get_user_changes",      "_nnc_get_user_changes")
 	register_native("nnc_set_user_changes",      "_nnc_set_user_changes")
+}
+
+public native_filter(const szNative[], id, iTrap)
+{
+	if(!iTrap)
+	{
+		static i
+
+		for(i = 0; i < sizeof(g_szNatives); i++)
+		{
+			if(equal(szNative, g_szNatives[i]))
+			{
+				return PLUGIN_HANDLED
+			}
+		}
+	}
+
+	return PLUGIN_CONTINUE
 }
 
 public _nnc_change_user_name()
